@@ -1,0 +1,11 @@
+<h1>{{ test_string }}</h1>
+
+<ul>
+{% for entry in time_entries %}
+    <li>
+        ID: {{ entry.id }}
+        - START: {{ entry.start }}
+        - PROJECT_ID: {{ entry.project.pid }}
+        - CLIENT_NAME: {{ entry.project.client.name }}</li>
+{% endfor %}
+</ul>

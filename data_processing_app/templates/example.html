@@ -1,0 +1,6 @@
+<h1>{{ week_sum }}</h1>
+<ul>
+{% for week in week_sum %}
+    <li>Week: {{ week.week }} - Hours: {{ week.week_total }}</li>
+{% endfor %}
+</ul>

@@ -1,0 +1,51 @@
+{% extends "admin/change_list.html" %}
+{% load static %}
+
+<!-- Override extrahead to add Chart.js -->
+{% block extrahead %}
+{{ block.super }}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.bundle.min.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const ctx = document.getElementById('myChart').getContext('2d');
+
+
+  const x = ['1', '2', '34', '35', '36', '37', '38', '39', '40', '41', '42', '43', '44', '45', '46', '47', '48', '49', '50', '51', '52'];
+  const y = [28.614722222222223, 33.780833333333334, 19.794444444444444, 2.486666666666667, 2.1880555555555556, 28.625833333333333, 35.185833333333335, 32.85138888888889, 31.41611111111111, 36.74527777777778, 37.45805555555555, 30.718888888888888, 33.81, 14.930555555555555, 23.473333333333333, 10.58361111111111, 24.541666666666668, 38.70194444444444, 52.51833333333333, 41.479166666666664, 16.55388888888889];
+
+
+  // Render the chart
+  const chart = new Chart(ctx, {
+      type: 'bar',
+    	data: {
+      labels: x,
+      datasets: [
+        {
+          label: "Population (millions)",
+          backgroundColor: ["rgba(255, 99, 132, 0.2)","rgba(255, 159, 64, 0.2)","rgba(255, 205, 86, 0.2)","rgba(75, 192, 192, 0.2)","rgba(54, 162, 235, 0.2)","rgba(153, 102, 255, 0.2)","rgba(201, 203, 207, 0.2)"],
+          data: y,
+        }
+      ]
+    },
+    options: {
+      legend: { display: false },
+      title: {
+        display: true,
+        text: 'Working hours'
+      }
+	}
+
+  });
+});
+</script>
+{% endblock %}
+
+{% block content %}
+<!-- Render our chart -->
+<div style="width: 80%;">
+  <canvas style="margin-bottom: 30px; width: 60%; height: 50%;" id="myChart"></canvas>
+</div>
+<!-- Render the rest of the ChangeList view -->
+{{ block.super }}
+{% endblock %}
