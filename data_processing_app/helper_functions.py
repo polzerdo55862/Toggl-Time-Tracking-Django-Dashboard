@@ -272,7 +272,6 @@ def collect_context():
                 .annotate(y=Sum('duration') / 3600) \
                 .order_by('order_field')
         )
-
         xaxis_actual = []
         yaxis_actual = []
 

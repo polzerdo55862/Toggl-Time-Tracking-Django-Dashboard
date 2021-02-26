@@ -1,17 +1,32 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>test</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>test</title>
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-black.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
+
+
 <body>
-<a href="admin">Admin/Settings</a>
-<form action="" method="post">
-    {% csrf_token %}
-    <button type="text" name="function" value="reload_toggl_data">Reload Data from Toggl</button>
-    <button type="text" name="function" value="reload_ph">Collect Public Holidays from Web</button>
-</form>
+
+<!-- Navbar -->
+<div class="w3-top">
+  <div class="w3-bar w3-theme w3-top w3-left-align w3-large">
+      <a href="reload_toggl" class="w3-bar-item w3-button w3-theme-l1">Reload Data from Toggl</a>
+      <a href="reload_ph" class="w3-bar-item w3-button w3-hide-small w3-hover-white">Reload Public Holidays</a>
+      <a href="admin" class="w3-bar-item w3-button w3-hide-small w3-hover-white">Admin/Settings</a
+  </div>
+</div>
+
+<!--<form action="" method="post">-->
+<!--    {% csrf_token %}-->
+<!--    <button type="text" name="function" value="reload_toggl_data">Reload Data from Toggl</button>-->
+<!--    <button type="text" name="function" value="reload_ph">Collect Public Holidays from Web</button>-->
+<!--</form>-->
 
 <div>
 {% autoescape off %}
