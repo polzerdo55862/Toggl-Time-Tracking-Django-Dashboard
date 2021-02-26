@@ -6,7 +6,13 @@
   <title>test</title>
 </head>
 <body>
-<h1>Test</h1>
+<a href="admin">Admin/Settings</a>
+<form action="" method="post">
+    {% csrf_token %}
+    <button type="text" name="function" value="reload_toggl_data">Reload Data from Toggl</button>
+    <button type="text" name="function" value="reload_ph">Collect Public Holidays from Web</button>
+</form>
+
 <div>
 {% autoescape off %}
 {{ plot_div }}

@@ -15,15 +15,9 @@ import pandas as pd
 import requests
 from bs4 import BeautifulSoup
 import re
-import sys
-import matplotlib.pyplot as plt
 import numpy as np
-import copy
-import os
-import django
 import datetime
 import data_processing_app.models as models
-from data_management import settings
 
 
 def collect_data_from_toggl():
@@ -99,6 +93,8 @@ def web_scraper_puplic_holidays():
     public_holidays_df = pd.DataFrame(data=public_holidays)
     public_holidays_df = public_holidays_df.rename(columns={0: "days"})
 
+    #clear table
+    models.public_holidays.objects.all().delete()
 
     for index, row in public_holidays_df.iterrows():
         new_entry = models.public_holidays(days=row.days)
@@ -127,6 +123,7 @@ def define_target_working_hours():
     working_days_sum_by_week_df = working_days_sum_by_week_df['working_hours'].agg(np.sum)
     working_days_sum_by_week_df = pd.DataFrame(working_days_sum_by_week_df)
 
-
-collect_data_from_toggl()
-define_target_working_hours()
+#use only once for load data
+#web_scraper_puplic_holidays()
+# collect_data_from_toggl()
+# define_target_working_hours()

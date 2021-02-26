@@ -135,8 +135,8 @@ from datetime import date, datetime
 import os
 
 #defines the time frame the script is interessted in
-start_date = datetime(2021, 1, 1)
-end_date = datetime.today()
+start_date = date(2021, 1, 1)
+end_date = date.today()
 
 #working hours per day
 target_hours_per_day = 7

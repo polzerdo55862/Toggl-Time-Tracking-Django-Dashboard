@@ -8,6 +8,14 @@ import pytz
 import data_processing_app.models as models
 import pandas as pd
 import datetime
+import data_processing_app.models as models
+from django.db.models.functions import ExtractWeek, ExtractYear
+from django.db.models import Sum
+import data_processing_app.toggl_data_processing as data_processing
+import plotly.offline as opy
+import plotly.graph_objs as go
+from django.shortcuts import render
+from plotly.offline import plot
 
 #Sample data
 # workspaces_df = pd.DataFrame({'wid': [4546930], 'name': ["Dans Workspace"]})
@@ -52,3 +60,15 @@ import datetime
 #                                          start=row.start,
 #                                          duration=row.duration)
 #     new_time_entry.save()
+
+chart_data_target = (
+    models.day_types.objects.filter() \
+        .annotate(week=ExtractWeek('days')).values('week') \
+        .annotate(year=ExtractYear('days')).values('year', 'week') \
+        .annotate(order_field=ExtractYear('days') + "." + ExtractWeek('days') / 53).values('year', 'week',
+                                                                                           'order_field') \
+        .annotate(y=Sum('working_hours')) \
+        .order_by('order_field')
+)
+
+test = "test"
