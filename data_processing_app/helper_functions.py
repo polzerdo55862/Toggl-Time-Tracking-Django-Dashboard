@@ -263,6 +263,8 @@ def collect_context():
 
     all_clients = models.toggl_clients.objects.all()
 
+    clients_hours_sum = []
+    client_name = []
     for client in all_clients:
         chart_data_actual = (
             models.time_entries.objects.filter(project__client__name=client.name)
@@ -283,8 +285,11 @@ def collect_context():
         fig.add_trace(go.Bar(
             x=xaxis_actual,
             y=yaxis_actual,
-            name='Actual [h]: '+str(client.name),
+            name='Actual [h]: '+str(client.name) + " - " + str(round(sum(yaxis_actual), 2)) + " h",
         ))
+
+        clients_hours_sum.append(sum(yaxis_actual))
+        client_name.append(client.name)
 
     chart_data_target = (
         models.day_types.objects.filter()\
@@ -311,7 +316,7 @@ def collect_context():
     fig.add_trace(go.Bar(
         x=xaxis_target,
         y=yaxis_target,
-        name='Target [h]',
+        name='Target [h]: ' + " - " + str(round(sum(yaxis_target), 2)) + " h",
         marker_color='lightsalmon'
     ))
 
@@ -320,6 +325,12 @@ def collect_context():
     fig.update_xaxes(type='category')
     plt_div = plot(fig, output_type='div')
 
+    sum_target = sum(yaxis_target)
     # Attach the chart data to the template context
-    context = {'plot_div': plt_div}
+    context = {'plot_div': plt_div,
+               'client_names': client_name,
+               'client_hours_sum': clients_hours_sum,
+               'sum_target': sum_target,
+               'overhours': clients_hours_sum[0] - sum_target
+               }
     return context
