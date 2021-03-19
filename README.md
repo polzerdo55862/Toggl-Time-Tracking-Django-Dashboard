@@ -37,6 +37,11 @@ Django app for analysing and visualizing the time events tracked in Toggl. The a
       toggl_api_token = os.environ['TOGGL_API'] #my toggl api token is saved as environmental variable
 
       ```
+5. Makemigrations/migrate
+      ```sh
+      python manage.py makemigrations
+      python manage.py migrate
+      ```
 
 ## License
 [MIT](https://choosealicense.com/licenses/mit/)
