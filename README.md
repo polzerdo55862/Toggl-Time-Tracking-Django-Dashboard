@@ -2,7 +2,7 @@
 
 <img src="./img/dashboard.png" width="800">
 
-Django app for analysing and visualizing the time events tracked in Toggl. The app queries your recorded working time from the Toggl API and calculates your target and actual working time together with the stored non-working days and working hours per day.
+Django app for analysing and visualizing the time events tracked in Toggl. The app queries your recorded working time from the Toggl API and calculates your target and actual working time using the specified non-working days and working hours per day.
 
 ## Built With
 
